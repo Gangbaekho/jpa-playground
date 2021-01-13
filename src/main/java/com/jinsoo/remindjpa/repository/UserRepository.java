@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 @Transactional
@@ -20,5 +21,20 @@ public class UserRepository {
 
         TypedQuery<User> namedQuery = entityManager.createNamedQuery("find_all_users",User.class);
         return namedQuery.getResultList();
+    }
+
+    public User findById(Long id){
+
+        User user = entityManager.find(User.class,id);
+        return user;
+    }
+
+    public void insertUser(User user){
+
+        if(Objects.isNull(user.getId())) {
+            entityManager.persist(user);
+        }else{
+            entityManager.merge(user);
+        }
     }
 }
