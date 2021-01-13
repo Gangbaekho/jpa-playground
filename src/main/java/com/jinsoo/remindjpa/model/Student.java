@@ -33,11 +33,20 @@ public class Student {
         this.studentName = studentName;
     }
 
+    public PassPort getPassPort() {
+        return passPort;
+    }
+
+    public void setPassPort(PassPort passPort) {
+        this.passPort = passPort;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
                 ", studentName='" + studentName + '\'' +
+                ", passPort=" + passPort +
                 '}';
     }
 }
