@@ -66,5 +66,21 @@ public class CourseRepositoryTests {
         LOGGER.info("courseList ==> {}",courseList);
     }
 
+    @Test
+    @DirtiesContext
+    public void updateTimeStampAndCreationTimeStampCheck(){
+
+        Course courseOne = new Course();
+        courseOne.setCourseName("course one");
+        courseRepository.saveCourse(courseOne);
+
+        Course courseTwo = new Course();
+        courseTwo.setCourseName("course two");
+        courseRepository.saveCourse(courseTwo);
+
+        List<Course> courseList = courseRepository.findAll_where();
+        LOGGER.info("courseList ==> {}",courseList);
+    }
+
 
 }
