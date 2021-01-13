@@ -4,9 +4,7 @@ import com.jinsoo.remindjpa.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
@@ -38,6 +36,18 @@ public class CourseRepository {
         List<Course> courseList = typedQuery.getResultList();
 
         return courseList;
+    }
+
+    public List<Course> findAllCourseStartsWithDummy(){
+        TypedQuery<Course> query = entityManager.createNamedQuery("all_course_starts_with_dummy",Course.class);
+        List<Course> result = query.getResultList();
+        return result;
+    }
+
+    public List<Course> findAllCourseContainsSpecial(){
+        TypedQuery<Course> query = entityManager.createNamedQuery("all_course_contains_special",Course.class);
+        List<Course> result = query.getResultList();
+        return result;
     }
 
     public void saveCourse(Course course){
