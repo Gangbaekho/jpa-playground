@@ -12,6 +12,10 @@ import java.util.Objects;
 
 @Repository
 @Transactional
+// 읽는 것만 하는 Repository가 아니라면
+// Transactional을 붙여서 method 단위로 Transaction이 일어날 수 있도록
+// 해야 한다는 거지.
+
 public class UserRepository {
 
     @PersistenceContext
