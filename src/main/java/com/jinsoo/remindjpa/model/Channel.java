@@ -29,4 +29,12 @@ public class Channel {
     public void setChannelName(String channelName) {
         this.channelName = channelName;
     }
+
+    @Override
+    public String toString() {
+        return "Channel{" +
+                "id=" + id +
+                ", channelName='" + channelName + '\'' +
+                '}';
+    }
 }
