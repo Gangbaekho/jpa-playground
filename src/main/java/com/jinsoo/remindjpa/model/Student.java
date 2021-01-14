@@ -46,7 +46,6 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", studentName='" + studentName + '\'' +
-                ", passPort=" + passPort +
                 '}';
     }
 }

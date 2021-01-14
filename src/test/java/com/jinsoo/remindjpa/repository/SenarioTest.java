@@ -34,10 +34,29 @@ public class SenarioTest {
         student.setPassPort(passPort);
         entityManager.persist(student);
 
-        entityManager.flush();
 
         Student selectedStudent = entityManager.find(Student.class,1L);
         LOGGER.info("selectedStudent ==> {}", selectedStudent);
+    }
+
+    @Test
+    @DirtiesContext
+    public void mappedByTest(){
+
+        PassPort passPort = new PassPort();
+        passPort.setPassPortId("NN103");
+        entityManager.persist(passPort);
+
+        Student student = new Student();
+        student.setStudentName("dummyStudent");
+        student.setPassPort(passPort);
+        entityManager.persist(student);
+
+        entityManager.flush();
+
+        PassPort selectedPassPort = entityManager.find(PassPort.class,1L);
+        LOGGER.info("selectedPassPort ==> {}", selectedPassPort);
+        LOGGER.info("Student related with this pass port ==> {}",selectedPassPort.getStudent());
 
     }
 }

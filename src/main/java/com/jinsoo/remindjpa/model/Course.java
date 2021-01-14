@@ -5,6 +5,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -30,6 +33,9 @@ public class Course {
 //    되는게 장점이 되겠군.
     @CreationTimestamp
     private LocalDateTime createdDateTime;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    private List<Review> reviewList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -63,6 +69,25 @@ public class Course {
         this.createdDateTime = createdDateTime;
     }
 
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void addReview(Review review) {
+        if(Objects.isNull(this.reviewList)) {
+            this.reviewList = new ArrayList<>();
+            this.reviewList.add(review);
+        }else{
+            this.reviewList.add(review);
+        }
+    }
+
+    public void removeReview(Review review){
+        if(Objects.nonNull(this.reviewList)){
+            this.reviewList.remove(review);
+        }
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -70,6 +95,7 @@ public class Course {
                 ", courseName='" + courseName + '\'' +
                 ", updatedDateTime=" + updatedDateTime +
                 ", createdDateTime=" + createdDateTime +
+                ", reviewList=" + reviewList +
                 '}';
     }
 }

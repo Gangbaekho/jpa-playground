@@ -10,6 +10,8 @@ public class PassPort {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String passPortId;
+    @OneToOne(mappedBy = "passPort")
+    private Student student;
 
     public Long getId() {
         return id;
@@ -25,6 +27,14 @@ public class PassPort {
 
     public void setPassPortId(String passPortId) {
         this.passPortId = passPortId;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override
