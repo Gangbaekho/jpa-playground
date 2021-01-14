@@ -1,6 +1,8 @@
 package com.jinsoo.remindjpa.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,6 +18,11 @@ public class Student {
 //    column이 새로 생긴걸로 보면 된다.
     @OneToOne
     private PassPort passPort;
+
+    @ManyToMany
+    @JoinTable(name="STUDENT_COURSE",
+    joinColumns = @JoinColumn(name="STUDENT_ID"), inverseJoinColumns = @JoinColumn(name="COURSE_ID"))
+    private List<Course> courseList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -39,6 +46,18 @@ public class Student {
 
     public void setPassPort(PassPort passPort) {
         this.passPort = passPort;
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void addCourse(Course course) {
+        this.courseList.add(course);
+    }
+
+    public void removeCourse(Course course){
+        this.courseList.remove(course);
     }
 
     @Override

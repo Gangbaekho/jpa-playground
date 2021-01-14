@@ -37,6 +37,9 @@ public class Course {
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     private List<Review> reviewList = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "courseList")
+    private List<Student> studentList = new ArrayList<>();
+
     public Long getId() {
         return id;
     }

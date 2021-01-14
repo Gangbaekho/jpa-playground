@@ -1,7 +1,9 @@
 package com.jinsoo.remindjpa.controller;
 
 import com.jinsoo.remindjpa.model.Course;
+import com.jinsoo.remindjpa.model.PassPort;
 import com.jinsoo.remindjpa.model.Review;
+import com.jinsoo.remindjpa.model.Student;
 import com.jinsoo.remindjpa.repository.CourseRepository;
 import com.jinsoo.remindjpa.repository.ReviewRepository;
 import org.slf4j.Logger;
@@ -59,6 +61,25 @@ public class SenarioController {
 
         Course course = em.find(Course.class,1L);
         LOGGER.info("course ==> {}",course);
+    }
+
+    @GetMapping("/test66")
+    public void manyToManyTestInsertTest(){
+
+        PassPort passPort = new PassPort();
+        passPort.setPassPortId("RANDOM123");
+        em.persist(passPort);
+
+        Course course = new Course();
+        course.setCourseName("dummy course name");
+        em.persist(course);
+
+        Student student = new Student();
+        student.setStudentName("dummy student name");
+        student.setPassPort(passPort);
+        student.addCourse(course);
+        em.persist(student);
+
     }
 
 }
